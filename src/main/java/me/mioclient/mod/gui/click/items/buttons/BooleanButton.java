@@ -51,14 +51,12 @@ public class BooleanButton extends Button {
             }
 
             if (future) {
-                GlStateManager.pushMatrix();
-                GlStateManager.enableBlend();
-                mc.getTextureManager().bindTexture(new ResourceLocation("textures/mio/gear.png"));
-                GlStateManager.translate(getX() + getWidth() - 6.7F + 8.0f, getY() + 7.7F - 0.3F, 0.0F);
-                GlStateManager.rotate(calculateRotation((float) progress), 0.0F, 0.0F, 1.0F);
-                RenderUtil.drawModalRect(-5, -5, 0.0F, 0.0F, 10, 10, 10, 10, 10.0F, 10.0F);
-                GlStateManager.disableBlend();
-                GlStateManager.popMatrix();
+                String color = (getState() || newStyle) ? "" : "" + ChatFormatting.GRAY;
+                String gear = setting.open ? "." : "...";
+
+                Managers.TEXT.drawStringWithShadow(color + gear,
+                        x - 1.5f + (float) width - 7.4f + 8.0f,
+                        y - 2.2f - (float) MioClickGui.INSTANCE.getTextOffset(), -1);
             } else {
                 String color = (getState() || newStyle) ? "" : "" + ChatFormatting.GRAY;
                 String gear = setting.open ? "-" : "+";
